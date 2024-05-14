@@ -1,22 +1,24 @@
 const title = document.getElementById("title");
 const content = document.getElementById("content");
-const image = document.getElementById("image")
+
 const btn = document.getElementById("btn-submit");
 
 btn.addEventListener("click" , () => {
 
-const userData = JSON.stringify({
-title: title.value,
-content:content.value,
-image:image.value,
 
-})
+const image = document.getElementById("image")
+const formData = new FormData();
+
+formData.append('title', title.value);
+formData.append('content', content.value);
+formData.append('image', image.files[0]);
 
 fetch("http://10.92.198.38:8080/feed/post", {
 method:"Post",
-body:userData,
-headers:{"Content-type": "application/json; charset=UTF-8 " ,
-    'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFtb3JvYmxveDIwMjRAaG90bWFpbC5jb20iLCJ1c2VySWQiOiI2NjQyNWZjZWVmZWVmODBlODI1NjRlOGYiLCJpYXQiOjE3MTU2MjYxMTAsImV4cCI6MTcxNTY0MDUxMH0.AgamQQ8C12XlsZS-cgd6yX2NDlaFdB9jM0ZKM8SlAzE"
+body: formData,
+headers:{
+    'Authorization': 'Bearer ' + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFtb3JvYmxveDIwMjRAaG90bWFpbC5jb20iLCJ1c2VySWQiOiI2NjQyNWZjZWVmZWVmODBlODI1NjRlOGYiLCJpYXQiOjE3MTU3MTEyMzEsImV4cCI6MTcxNTcyNTYzMX0.PBEuPZUeSwKAuguGDWNCNhUkfQfb9ZKJD6dkPIfvtLE"
+
 }
     
 })
